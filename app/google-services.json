@@ -1,0 +1,172 @@
+{
+  "project_info": {
+    "project_number": "377924010391",
+    "firebase_url": "https://unsaymaau.firebaseio.com",
+    "project_id": "unsaymaau",
+    "storage_bucket": "unsaymaau.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377924010391:android:a6a38264ddc515cf",
+        "android_client_info": {
+          "package_name": "com.whatsbest.nexusninja2.whatsbest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377924010391-ivfb9g7s2r0imfueplr3t278nu6mchh1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.whatsbest.nexusninja2.whatsbest",
+            "certificate_hash": "1397a29b9ba0a835b0cce337f6d74c01db6ad078"
+          }
+        },
+        {
+          "client_id": "377924010391-lb80h4bik74gspfg8f09g1c1hoec5kf5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzKYIjC0uOwOHDpAKQchdPRJ2nv04v2CU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377924010391-npqudmi7foqm2rtdvf8uoirmvo7tsh38.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "travel.UnsayMaau"
+              }
+            },
+            {
+              "client_id": "377924010391-lb80h4bik74gspfg8f09g1c1hoec5kf5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377924010391:android:348ee26e0bba6cb6",
+        "android_client_info": {
+          "package_name": "com.whatsbestapp.nexusbond.whatsbestapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377924010391-0ealf3ngke7kk45t13dfk5gsg7j3senu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.whatsbestapp.nexusbond.whatsbestapp",
+            "certificate_hash": "5ee997a9de0bd1dacdd33468792053ae775c1013"
+          }
+        },
+        {
+          "client_id": "377924010391-q73k0p6ie4mdvn04rsjtd46rtaqta51t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.whatsbestapp.nexusbond.whatsbestapp",
+            "certificate_hash": "1397a29b9ba0a835b0cce337f6d74c01db6ad078"
+          }
+        },
+        {
+          "client_id": "377924010391-lb80h4bik74gspfg8f09g1c1hoec5kf5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzKYIjC0uOwOHDpAKQchdPRJ2nv04v2CU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377924010391-npqudmi7foqm2rtdvf8uoirmvo7tsh38.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "travel.UnsayMaau"
+              }
+            },
+            {
+              "client_id": "377924010391-lb80h4bik74gspfg8f09g1c1hoec5kf5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377924010391:android:fead8d1257f2fd28",
+        "android_client_info": {
+          "package_name": "com.whatsbest.nexusbond.wassup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377924010391-e44mbiegqgtfpbqukl7pv2p83vkh3qja.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.whatsbest.nexusbond.wassup",
+            "certificate_hash": "1397a29b9ba0a835b0cce337f6d74c01db6ad078"
+          }
+        },
+        {
+          "client_id": "377924010391-lb80h4bik74gspfg8f09g1c1hoec5kf5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzKYIjC0uOwOHDpAKQchdPRJ2nv04v2CU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377924010391-npqudmi7foqm2rtdvf8uoirmvo7tsh38.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "travel.UnsayMaau"
+              }
+            },
+            {
+              "client_id": "377924010391-lb80h4bik74gspfg8f09g1c1hoec5kf5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

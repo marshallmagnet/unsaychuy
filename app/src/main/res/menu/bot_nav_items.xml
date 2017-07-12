@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_home"
+        android:title="Home"
+        android:icon="@drawable/ic_home_black_24dp"
+        />
+    <item
+        android:id="@+id/menu_activity"
+        android:title="Activities"
+        android:icon="@drawable/ic_remove_red_eye_black_24dp"
+        />
+    <item
+        android:id="@+id/menu_group"
+        android:title="Groups"
+        android:icon="@drawable/ic_group_black_24dp"
+        />
+
+    <item
+        android:id="@+id/menu_profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_person_black_24dp"
+        />
+</menu>
