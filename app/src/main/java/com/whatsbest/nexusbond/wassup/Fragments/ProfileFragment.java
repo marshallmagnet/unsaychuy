@@ -70,6 +70,7 @@ public class ProfileFragment extends Fragment
         btn_sign_out.setOnClickListener(onClick());
 
         fetchUser(firebaseUser);
+        fetchUsersGroups();
         return view;
     }
 
@@ -107,7 +108,7 @@ public class ProfileFragment extends Fragment
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                
+
             }
 
             @Override
@@ -115,6 +116,7 @@ public class ProfileFragment extends Fragment
 
             }
         };
+        userGroups.addValueEventListener(valueEventListener);
     }
 
     private void logout()
