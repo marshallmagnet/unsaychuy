@@ -513,6 +513,40 @@ public class DataSource {
         }
     }
 
+    public void setInvite_Snap(DataSnapshot dataSnapshot)
+    {
+        for(DataSnapshot poSnap: dataSnapshot.getChildren())
+        {
+            groups = new Groups();
+
+            if(poSnap.getValue().getClass().getName() == "java.lang.String")
+            {
+                groups.setGroup_id(poSnap.getKey());
+                invitedList.add(groups);
+            }
+        }
+    }
+
+    public void setGroupDetails_snap(DataSnapshot dataSnapshot)
+    {
+        groupsList.clear();
+        for (DataSnapshot poSnap: dataSnapshot.getChildren())
+        {
+            groups = new Groups();
+            groups.setGroup_id(poSnap.getKey());
+            groups.setGroup_name(poSnap.child("group_name").getValue().toString());
+            groups.setBackground_image_url(poSnap.child("background_image_url").getValue().toString());
+
+            for (int inner = 0; inner < invitedList.size(); inner++)
+            {
+                if(invitedList.get(inner).getGroup_id().equals(groups.getGroup_id()))
+                {
+                    groupsList.add(groups);
+                }
+            }
+        }
+    }
+
     public void setUser_id(String user_id) {
         this.user_id = user_id;
     }

@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.whatsbest.nexusbond.wassup.Activities.LoginActivity;
+import com.whatsbest.nexusbond.wassup.Adapters.ProfileAdapter;
 import com.whatsbest.nexusbond.wassup.Classes.Users;
+import com.whatsbest.nexusbond.wassup.DataHandler.DataSource;
 import com.whatsbest.nexusbond.wassup.R;
 import com.whatsbest.nexusbond.wassup.Utilities.CircleTransform;
 
@@ -41,6 +44,9 @@ public class ProfileFragment extends Fragment
     private FirebaseUser firebaseUser;
     private DatabaseReference databaseReference;
     private RecyclerView recyclerView;
+    private DataSource dataSource;
+    private LinearLayoutManager linearLayoutManager;
+    private ProfileAdapter profileAdapter;
 
     public static ProfileFragment newInstance()
     {
@@ -67,11 +73,26 @@ public class ProfileFragment extends Fragment
         btn_sign_out = (Button)view.findViewById(R.id.btn_sign_out);
         recyclerView =(RecyclerView)view.findViewById(R.id.recycler_view);
 
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setHasFixedSize(true);
+
+        dataSource = new DataSource();
+
         btn_sign_out.setOnClickListener(onClick());
+        dataSource.setUser_id(firebaseUser.getUid());
 
         fetchUser(firebaseUser);
         fetchUsersGroups();
         return view;
+    }
+
+    private void initializeData()
+    {
+        profileAdapter = new ProfileAdapter(dataSource.getGroupsList(), getActivity());
+        recyclerView.setAdapter(profileAdapter);
     }
 
     private void fetchUser(FirebaseUser firebaseUser)
@@ -108,7 +129,8 @@ public class ProfileFragment extends Fragment
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                dataSource.setInvite_Snap(dataSnapshot);
+                fetchGroups();
             }
 
             @Override
@@ -117,6 +139,26 @@ public class ProfileFragment extends Fragment
             }
         };
         userGroups.addValueEventListener(valueEventListener);
+    }
+
+    private void fetchGroups()
+    {
+        DatabaseReference groups = databaseReference.child("Groups");
+
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                dataSource.setGroupDetails_snap(dataSnapshot);
+                initializeData();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        groups.addValueEventListener(valueEventListener);
     }
 
     private void logout()
