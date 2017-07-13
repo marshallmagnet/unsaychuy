@@ -21,6 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.whatsbest.nexusbond.wassup.Classes.Users;
 import com.whatsbest.nexusbond.wassup.R;
 
+/**
+ * This java class is used for user registration
+ * with email and password
+ */
+
 public class RegisterActivity extends AppCompatActivity {
     private EditText et_email, et_password, et_confirm_password, et_full_name;
     private Button btn_sign_up;
@@ -45,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         btn_sign_up.setOnClickListener(onClick());
     }
 
+    // checks if the edit text fields have errors
     private void checkEditText()
     {
         if (et_email.getText().toString().isEmpty())
@@ -73,6 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    // signs up the user to the firebase authentication
     private void signUpUser()
     {
         firebaseAuth.createUserWithEmailAndPassword(et_email.getText().toString(), et_password.getText().toString())
@@ -94,6 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
+    // stores the data to the realtime database
     private void storeData(FirebaseUser mUser)
     {
         if (mUser.getPhotoUrl() == null)
@@ -110,6 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
         updateProfile();
     }
 
+    // updates the metadata profile of the user in the firebase authentication
     private void updateProfile()
     {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -138,12 +147,14 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
+    // brings the user to the login activity
     private void toLoginActivity()
     {
         Intent toLogin = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(toLogin);
     }
 
+    // creates toast messages
     private void Toaster(String message)
     {
         Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();

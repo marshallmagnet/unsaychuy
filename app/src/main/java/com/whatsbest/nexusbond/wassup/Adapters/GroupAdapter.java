@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by NexusNinja2 on 7/10/2017.
+ * Adapter class for the Group Fragment
  */
 
 public class GroupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -38,6 +38,7 @@ public class GroupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private FirebaseUser firebaseUser;
     private DatabaseReference databaseReference;
 
+    //holder class for the groups to be shown in the recyclerview
     public class GroupHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView cv_view;
         TextView txt_group_name, txt_group_desc;
@@ -62,6 +63,7 @@ public class GroupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             }
         }
 
+        //checks if the user is an admin, memeber, or a pending member of the group
         private void checking() {
             if (groups.get(getAdapterPosition()).isAdmin_status() == true) {
                 toGroupFragment(groups.get(getAdapterPosition()).getGroup_id());
@@ -69,12 +71,12 @@ public class GroupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 toGroupFragment(groups.get(getAdapterPosition()).getGroup_id());
             } else if (groups.get(getAdapterPosition()).isPending_status() == true) {
                 pendingAlertDialog();
-            } else if (groups.get(getAdapterPosition()).isAdmin_status() != true && groups.get(getAdapterPosition()).isMember_status() != true && groups.get(getAdapterPosition()).isPending_status() != true)
-            {
+            } else if (groups.get(getAdapterPosition()).isAdmin_status() != true && groups.get(getAdapterPosition()).isMember_status() != true && groups.get(getAdapterPosition()).isPending_status() != true) {
                 alertDialog("Request Membership", "You are not a member of this group. Do you wish to request for a membership?");
             }
         }
 
+        //alert dialog for deciding things
         private void alertDialog(String title, String message) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
             alertDialog.setTitle(title);
@@ -95,6 +97,7 @@ public class GroupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             alertDialog.show();
         }
 
+        //alert dialog for pending users
         private void pendingAlertDialog() {
             AlertDialog.Builder pendingAlertDialog = new AlertDialog.Builder(context);
             pendingAlertDialog.setTitle("Pending Request");
@@ -110,6 +113,7 @@ public class GroupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
+    //the adapters constructor
     public GroupAdapter(List<Groups> groups, Context context) {
         this.groups = groups;
         this.context = context;
@@ -147,6 +151,7 @@ public class GroupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return position;
     }
 
+    //modifies the realtime databse for requesting membership on a group
     private void requestMembership(String group_id) {
         Map<String, Object> pendingMembership = new HashMap<>();
         pendingMembership.put("/Groups/" + group_id + "/pending_members/" + firebaseUser.getUid(), true);
@@ -154,9 +159,9 @@ public class GroupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         databaseReference.updateChildren(pendingMembership);
     }
 
-    private void toGroupFragment(String group_id)
-    {
-        FragmentTransaction fragmentTransaction = ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction();
+    //used for going back to the group landing page
+    private void toGroupFragment(String group_id) {
+        FragmentTransaction fragmentTransaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, GroupLandingFragment.newInstance(group_id));
         fragmentTransaction.addToBackStack("group_landing").commit();
     }

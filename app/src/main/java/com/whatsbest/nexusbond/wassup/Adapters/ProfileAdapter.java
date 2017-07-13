@@ -1,6 +1,8 @@
 package com.whatsbest.nexusbond.wassup.Adapters;
 
 import android.content.Context;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +17,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 import com.whatsbest.nexusbond.wassup.Classes.Groups;
+import com.whatsbest.nexusbond.wassup.Fragments.GroupLandingFragment;
 import com.whatsbest.nexusbond.wassup.R;
 import com.whatsbest.nexusbond.wassup.Utilities.CircleTransform;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by NexusNinja2 on 7/13/2017.
@@ -52,8 +57,10 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btn_check:
+                    acceptInvite(groups.get(getAdapterPosition()).getGroup_id());
                     break;
                 case R.id.btn_reject:
+                    rejectInvite(groups.get(getAdapterPosition()).getGroup_id());
                     break;
             }
         }
@@ -92,5 +99,29 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    private void acceptInvite(String group_id)
+    {
+        Map<String, Object> acceptInvite = new HashMap<>();
+        acceptInvite.put("/Groups/" + group_id + "/members/" + firebaseUser.getUid(), true);
+        acceptInvite.put("/Users_Groups/" + firebaseUser.getUid() + "/Member_Groups/" + group_id, true);
+        databaseReference.updateChildren(acceptInvite);
+        databaseReference.child("Groups").child(group_id).child("invited_pending_members").child(firebaseUser.getUid()).removeValue();
+        databaseReference.child("Users_Groups").child(firebaseUser.getUid()).child("Pending_Groups").child(group_id).removeValue();
+        toGroupLandingFragment(group_id);
+    }
+
+    private void rejectInvite(String group_id)
+    {
+        databaseReference.child("Groups").child(group_id).child("pending_members").child(firebaseUser.getUid()).removeValue();
+        databaseReference.child("Users_Groups").child(firebaseUser.getUid()).child("Pending_Groups").child(group_id).removeValue();
+    }
+
+    private void toGroupLandingFragment(String group_id)
+    {
+        FragmentTransaction fragmentTransaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, GroupLandingFragment.newInstance(group_id));
+        fragmentTransaction.commit();
     }
 }

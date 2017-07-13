@@ -14,6 +14,9 @@ import com.whatsbest.nexusbond.wassup.Fragments.PostFragment;
 import com.whatsbest.nexusbond.wassup.Fragments.ProfileFragment;
 import com.whatsbest.nexusbond.wassup.R;
 
+/**
+ * This java class is shown after successfully logging in
+ */
 public class LandingActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
 
@@ -34,6 +37,8 @@ public class LandingActivity extends AppCompatActivity {
         });
     }
 
+    //selects the fragment to use when the different menus on the
+    //bottom navigation view is chosen
     private void selectFragment(MenuItem item)
     {
         Fragment fragment = null;
@@ -56,6 +61,7 @@ public class LandingActivity extends AppCompatActivity {
         theFragment(fragment);
     }
 
+    //is reused whenever the bottom navigation changes view
     public void theFragment(Fragment fragment)
     {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

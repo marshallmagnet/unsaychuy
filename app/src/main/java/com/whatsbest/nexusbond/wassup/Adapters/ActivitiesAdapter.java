@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by NexusNinja2 on 7/10/2017.
+ * Adapter class for the activities fragment
  */
 
 public class ActivitiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -37,6 +37,7 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private FirebaseUser firebaseUser;
     private DatabaseReference databaseReference;
 
+    //holder class for the four frames layout post
     public class FourCrossHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView cvView;
         TextView txt_full_name, txt_frame1, txt_frame2, txt_frame3, txt_frame4, txt_desc, txt_frame1_votes, txt_frame2_votes, txt_frame3_votes, txt_frame4_votes;
@@ -90,6 +91,7 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+    //holder class for the two frames layout post
     public class TwoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView cvView;
         TextView txt_full_name, txt_frame1, txt_frame2, txt_desc, txt_frame1_votes, txt_frame2_votes;
@@ -133,6 +135,7 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+    //holder class for the three frames layout post
     public class ThreeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView cvView;
         TextView txt_full_name, txt_frame1, txt_frame2, txt_frame3, txt_desc, txt_frame1_votes, txt_frame2_votes, txt_frame3_votes;
@@ -181,6 +184,7 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+    //constructor
     public ActivitiesAdapter(List<Posts> posts, Context context) {
         this.posts = posts;
         this.context = context;
@@ -426,6 +430,7 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return position;
     }
 
+    //modifies the realtime databse for following other user
     private void followUser(String author_id) {
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/Users/" + author_id + "/followers/" + firebaseUser.getUid(), true);
@@ -433,6 +438,7 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         databaseReference.updateChildren(childUpdates);
     }
 
+    //modifies the realtime databse for unfollowing other users
     private void unfollowUser(String author_id) {
         databaseReference.child("Users").child(author_id).child("followers").child(firebaseUser.getUid()).removeValue();
         databaseReference.child("Users").child(firebaseUser.getUid()).child("following").child(author_id).removeValue();

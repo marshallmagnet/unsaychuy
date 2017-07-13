@@ -31,6 +31,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.whatsbest.nexusbond.wassup.Classes.Users;
 import com.whatsbest.nexusbond.wassup.R;
 
+/**
+ * This java class is the first to be launch whenever the app starts
+ */
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private static final int GOOGLE_SIGN_IN = 9001;
 
@@ -107,6 +110,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
+    // after choosing the account to use to login, this method retrieves the credentials of the user
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         firebaseAuth.signInWithCredential(credential)
@@ -140,6 +144,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 });
     }
 
+    // stores the data into the realtime databse on firebase
     private void storeData(FirebaseUser mUser) {
         Users user = new Users(mUser.getDisplayName(), mUser.getEmail(), mUser.getPhotoUrl().toString(), mUser.getPhotoUrl().toString());
         databaseReference.child("Users").child(mUser.getUid()).setValue(user);
@@ -168,23 +173,27 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
     }
 
+    // pops up the google fragment upon login
     private void toSignInGoogle() {
         Auth.GoogleSignInApi.signOut(googleApiClient);
         Intent googleIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
         startActivityForResult(googleIntent, GOOGLE_SIGN_IN);
     }
 
+    // goes to the landing activity if the user has login successfully
     private void toLandingActivity() {
         Intent toLandingActivity = new Intent(LoginActivity.this, LandingActivity.class);
         startActivity(toLandingActivity);
         this.finish();
     }
 
+    // goes to the registration activity
     private void toRegisterActivity() {
         Intent toRegistryActivity = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(toRegistryActivity);
     }
 
+    // creates toast messages
     private void Toaster(String text) {
         Toast.makeText(LoginActivity.this, text, Toast.LENGTH_SHORT).show();
     }
